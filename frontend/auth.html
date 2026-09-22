@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>أورا | الدخول</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo" style="text-decoration:none">
+      <i class="fas fa-water"></i> أورا
+    </a>
+    <div><a href="index.html" class="nav-btn" style="text-decoration:none">الرئيسية</a></div>
+  </nav>
+
+  <main class="page-wrap" style="display:flex;align-items:center;justify-content:center;padding-top:140px">
+    <div class="card" style="max-width:520px;width:100%">
+      <div class="auth-tabs">
+        <button id="tab-login" class="active" type="button">تسجيل الدخول</button>
+        <button id="tab-register" type="button">إنشاء حساب</button>
+      </div>
+
+      <form id="form-login">
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" name="email" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label>كلمة المرور</label>
+          <input type="password" name="password" required autocomplete="current-password" />
+        </div>
+        <button type="submit" class="btn-primary btn-block" id="login-submit">
+          <i class="fas fa-right-to-bracket"></i> دخول
+        </button>
+        <div style="text-align:center;margin-top:1rem">
+          <a href="#" id="forgot-link" style="color:var(--text-secondary);font-size:0.9rem">
+            نسيت كلمة المرور؟
+          </a>
+        </div>
+      </form>
+
+      <form id="form-register" style="display:none">
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" name="fullName" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" name="email" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label>كلمة المرور</label>
+          <input type="password" name="password" required minlength="8" autocomplete="new-password" />
+          <small style="color:var(--text-secondary);font-size:0.8rem">
+            8 أحرف على الأقل، حرف كبير وصغير ورقم
+          </small>
+        </div>
+        <button type="submit" class="btn-primary btn-block" id="register-submit">
+          <i class="fas fa-user-plus"></i> إنشاء الحساب
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var h = window.location.hostname;
+      window.AURA_API = window.location.origin + '/api';
+    })();
+  </script>
+
+  <script type="module">
+    import { login, register, bootstrapAuth } from './js/auth.js';
+    import { showToast } from './js/notifications.js';
+
+    bootstrapAuth().then(function (u) {
+      if (u) {
+        window.location.href = u.role === 'ADMIN' ? './admin.html' : './dashboard.html';
+      }
+    });
+
+    var tabLogin = document.getElementById('tab-login');
+    var tabRegister = document.getElementById('tab-register');
+    var formLogin = document.getElementById('form-login');
+    var formRegister = document.getElementById('form-register');
+
+    tabLogin.addEventListener('click', function () {
+      tabLogin.classList.add('active');
+      tabRegister.classList.remove('active');
+      formLogin.style.display = '';
+      formRegister.style.display = 'none';
+    });
+
+    tabRegister.addEventListener('click', function () {
+      tabRegister.classList.add('active');
+      tabLogin.classList.remove('active');
+      formRegister.style.display = '';
+      formLogin.style.display = 'none';
+    });
+      formLogin.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var btn = document.getElementById('login-submit');
+      var orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> جارٍ الدخول...';
+      var fd = new FormData(formLogin);
+      try {
+        var user = await login({ email: fd.get('email'), password: fd.get('password') });
+        showToast('تم تسجيل الدخول بنجاح', 'success');
+        setTimeout(function () {
+          window.location.href = user.role === 'ADMIN' ? './admin.html' : './dashboard.html';
+        }, 500);
+      } catch (err) {
+        showToast(err.message || 'فشل تسجيل الدخول', 'error');
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+    });
+
+    formRegister.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var btn = document.getElementById('register-submit');
+      var orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> جارٍ الإنشاء...';
+      var fd = new FormData(formRegister);
+      try {
+        await register({
+          fullName: fd.get('fullName'),
+          email: fd.get('email'),
+          password: fd.get('password'),
+        });
+        showToast('تم إنشاء الحساب بنجاح', 'success');
+        setTimeout(function () {
+          window.location.href = './dashboard.html';
+        }, 500);
+      } catch (err) {
+        showToast(err.message || 'فشل إنشاء الحساب', 'error');
+        btn.disabled = false;
+        btn.innerHTML = orig;
+      }
+    });
+
+    document.getElementById('forgot-link').addEventListener('click', async function (e) {
+      e.preventDefault();
+      var email = prompt('أدخل بريدك الإلكتروني:');
+      if (!email) return;
+      try {
+        var apiModule = await import('./js/api.js');
+        await apiModule.api.post('/auth/forgot-password', { email: email });
+        showToast('إذا كان البريد مسجلاً، ستصلك رسالة', 'info');
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    });
+  </script>
+</body>
+</html>

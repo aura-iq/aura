@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Environment variables (حساس - لا يُرفع!)
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+backend.log
+frontend.log
+tunnel*.log
+npm-debug.log*
+
+# Prisma
+backend/prisma/*.db
+backend/prisma/*.db-journal
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Tunnel files
+*.lhr.life
+cloudflared*.log

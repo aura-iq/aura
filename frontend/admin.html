@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>أورا | لوحة الإدارة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo" style="text-decoration:none">
+      <i class="fas fa-shield-halved"></i> أورا | إدارة
+    </a>
+    <div style="display:flex;align-items:center;gap:0.8rem">
+      <a href="dashboard.html" class="user-chip"><i class="fas fa-user"></i> حسابي</a>
+      <button class="nav-btn" id="logout-btn"><i class="fas fa-right-from-bracket"></i> خروج</button>
+    </div>
+  </nav>
+
+  <main class="page-wrap container">
+    <h1 class="section-title" style="text-align:right">لوحة الإدارة</h1>
+
+    <div id="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem"></div>
+
+    <div class="tabs">
+      <button class="active" data-tab="users" type="button"><i class="fas fa-users"></i> المستخدمون</button>
+      <button data-tab="messages" type="button"><i class="fas fa-envelope"></i> الرسائل</button>
+      <button data-tab="broadcast" type="button"><i class="fas fa-bullhorn"></i> إشعار جماعي</button>
+    </div>
+
+    <section class="card" id="tab-users">
+      <div style="display:flex;gap:0.6rem;margin-bottom:1rem;flex-wrap:wrap">
+        <input id="user-search" placeholder="بحث بالبريد أو الاسم..."
+          style="flex:1;min-width:200px;background:rgba(0,0,0,0.35);border:1px solid var(--glass-border);border-radius:12px;padding:0.8rem 1rem;color:var(--text-primary);font-family:inherit" />
+        <button class="btn-primary" id="user-search-btn" type="button"><i class="fas fa-search"></i> بحث</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="data-table" id="users-table">
+          <thead>
+            <tr><th>الاسم</th><th>البريد</th><th>الدور</th><th>الحالة</th><th>التاريخ</th><th>إجراءات</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="tab-messages" style="display:none">
+      <div style="overflow-x:auto">
+        <table class="data-table" id="messages-table">
+          <thead>
+            <tr><th>الاسم</th><th>البريد</th><th>الرسالة</th><th>التاريخ</th><th>إجراءات</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="tab-broadcast" style="display:none">
+      <form id="broadcast-form">
+        <div class="form-group">
+          <label>العنوان</label>
+          <input type="text" name="title" required maxlength="120" />
+        </div>
+        <div class="form-group">
+          <label>النص</label>
+          <textarea name="body" required maxlength="1000"></textarea>
+        </div>
+        <div class="form-group">
+          <label>الفئة المستهدفة</label>
+          <select name="role">
+            <option value="">الكل</option>
+            <option value="USER">المستخدمون</option>
+            <option value="ADMIN">المديرون</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> إرسال</button>
+      </form>
+    </section>
+  </main>
+
+<script>
+  (function(){
+    var h = window.location.hostname;
+    window.AURA_API = window.location.origin + '/api';
+  })();
+</script>
+  <script type="module" src="./js/admin.js"></script>
+</body>
+</html>
