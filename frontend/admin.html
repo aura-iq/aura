@@ -17,7 +17,6 @@
     </a>
     <div style="display:flex;align-items:center;gap:0.8rem">
       <a href="dashboard.html" class="user-chip"><i class="fas fa-user"></i> حسابي</a>
-      <button class="nav-btn" id="logout-btn"><i class="fas fa-right-from-bracket"></i> خروج</button>
     </div>
   </nav>
 
@@ -28,8 +27,9 @@
 
     <div class="tabs">
       <button class="active" data-tab="users" type="button"><i class="fas fa-users"></i> المستخدمون</button>
-      <button data-tab="messages" type="button"><i class="fas fa-envelope"></i> الرسائل</button>
+      <button data-tab="messages" type="button"><i class="fas fa-bell"></i> الإشعارات</button>
       <button data-tab="broadcast" type="button"><i class="fas fa-bullhorn"></i> إشعار جماعي</button>
+      <button data-tab="chats" type="button"><i class="fas fa-comments"></i> المحادثات</button>
     </div>
 
     <section class="card" id="tab-users">
@@ -48,14 +48,16 @@
       </div>
     </section>
 
+
     <section class="card" id="tab-messages" style="display:none">
-      <div style="overflow-x:auto">
-        <table class="data-table" id="messages-table">
-          <thead>
-            <tr><th>الاسم</th><th>البريد</th><th>الرسالة</th><th>التاريخ</th><th>إجراءات</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      <div class="notifications-header">
+        <h3><i class="fas fa-bell"></i> الإشعارات</h3>
+        <button id="refresh-notifications" class="nav-btn" style="padding:0.5rem 1rem;font-size:0.85rem">
+          <i class="fas fa-rotate"></i> تحديث
+        </button>
+      </div>
+      <div id="notifications-list" class="notifications-list">
+        <div class="empty-state"><i class="fas fa-spinner fa-spin"></i></div>
       </div>
     </section>
 
@@ -80,12 +82,54 @@
         <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> إرسال</button>
       </form>
     </section>
-  </main>
+  
+    <!-- المحادثات -->
+    <section class="card" id="tab-chats" style="display:none;padding:0;overflow:hidden">
+      <div class="chats-layout">
+        <aside class="chats-sidebar">
+          <div class="chats-sidebar-header">
+            <i class="fas fa-inbox"></i>
+            <span>المحادثات</span>
+            <button id="refresh-chats" title="تحديث"><i class="fas fa-rotate"></i></button>
+          </div>
+          <div id="chats-list" class="chats-list">
+            <div class="empty-state"><i class="fas fa-spinner fa-spin"></i></div>
+          </div>
+        </aside>
+
+        <div class="chats-main">
+          <div id="chat-empty-state" class="chats-empty">
+            <i class="fas fa-comments"></i>
+            <p>اختر محادثة لعرضها</p>
+          </div>
+
+          <div id="chat-view" style="display:none;height:100%;display:none;flex-direction:column">
+            <div class="chats-view-header">
+              <div>
+                <strong id="chat-view-name">—</strong>
+                <small id="chat-view-email">—</small>
+              </div>
+            </div>
+
+            <div id="chat-view-messages" class="chats-messages"></div>
+
+            <form id="chat-reply-form" class="chats-form">
+              <textarea id="chat-reply-input" placeholder="اكتب ردك..." maxlength="2000" rows="1"></textarea>
+              <button type="submit" class="chat-send-btn" id="chat-reply-btn">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</main>
 
 <script>
   (function(){
     var h = window.location.hostname;
-    window.AURA_API = window.location.origin + '/api';
+    window.AURA_API = '/api';
   })();
 </script>
   <script type="module" src="./js/admin.js"></script>

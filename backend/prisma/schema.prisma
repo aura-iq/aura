@@ -29,6 +29,7 @@ model User {
 
   profile         Profile?
   refreshTokens   RefreshToken[]
+  chatThreads     ChatThread[]
   notifications   Notification[]
   contactMessages ContactMessage[]
 
@@ -102,4 +103,30 @@ model Notification {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, isRead])
+}
+
+model ChatThread {
+  id          String        @id @default(cuid())
+  userId      String
+  status      String        @default("open")
+  lastMessage DateTime      @default(now())
+  createdAt   DateTime      @default(now())
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages    ChatMessage[]
+  @@index([userId])
+  @@index([status])
+  @@index([lastMessage])
+}
+
+model ChatMessage {
+  id          String     @id @default(cuid())
+  threadId    String
+  senderId    String
+  text        String
+  isFromAdmin Boolean    @default(false)
+  isRead      Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  thread      ChatThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  @@index([threadId])
+  @@index([isRead])
 }

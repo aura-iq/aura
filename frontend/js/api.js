@@ -1,13 +1,16 @@
-const API_BASE = window.AURA_API || 'http://localhost:4000/api';
+const API_BASE = '/api';
 
-let accessToken = null;
+function getToken() {
+  return localStorage.getItem('aura_token') || null;
+}
 
 export function setAccessToken(t) {
-  accessToken = t;
+  if (t) localStorage.setItem('aura_token', t);
+  else localStorage.removeItem('aura_token');
 }
 
 export function getAccessToken() {
-  return accessToken;
+  return getToken();
 }
 
 let refreshPromise = null;
@@ -18,15 +21,15 @@ async function refreshAccessToken() {
     method: 'POST',
     credentials: 'include',
   })
-    .then(function (r) {
+    .then(function(r) {
       if (!r.ok) throw new Error('REFRESH_FAILED');
       return r.json();
     })
-    .then(function (data) {
-      accessToken = data.data.accessToken;
-      return accessToken;
+    .then(function(data) {
+      setAccessToken(data.data.accessToken);
+      return data.data.accessToken;
     })
-    .finally(function () {
+    .finally(function() {
       refreshPromise = null;
     });
   return refreshPromise;
@@ -41,7 +44,8 @@ async function request(path, opts) {
 
   const headers = {};
   if (body) headers['Content-Type'] = 'application/json';
-  if (auth && accessToken) headers['Authorization'] = 'Bearer ' + accessToken;
+  const token = getToken();
+  if (auth && token) headers['Authorization'] = 'Bearer ' + token;
 
   const res = await fetch(API_BASE + path, {
     method: method,
@@ -55,16 +59,12 @@ async function request(path, opts) {
       await refreshAccessToken();
       return request(path, { method: method, body: body, auth: auth, retry: false });
     } catch (e) {
-      // fallthrough
+      // failed refresh
     }
   }
 
   let payload = null;
-  try {
-    payload = await res.json();
-  } catch (e) {
-    // noop
-  }
+  try { payload = await res.json(); } catch (e) {}
 
   if (!res.ok) {
     const msg = payload && payload.error && payload.error.message
@@ -73,7 +73,6 @@ async function request(path, opts) {
     const err = new Error(msg);
     err.code = payload && payload.error ? payload.error.code : 'UNKNOWN';
     err.status = res.status;
-    err.details = payload && payload.error ? payload.error.details : null;
     throw err;
   }
 
@@ -82,11 +81,10 @@ async function request(path, opts) {
 }
 
 export const api = {
-  get: function (p, opts) { return request(p, Object.assign({}, opts, { method: 'GET' })); },
-  post: function (p, body, opts) { return request(p, Object.assign({}, opts, { method: 'POST', body: body })); },
-  put: function (p, body, opts) { return request(p, Object.assign({}, opts, { method: 'PUT', body: body })); },
-  patch: function (p, body, opts) { return request(p, Object.assign({}, opts, { method: 'PATCH', body: body })); },
-  del: function (p, opts) { return request(p, Object.assign({}, opts, { method: 'DELETE' })); },
+  get: function(p, opts) { return request(p, Object.assign({}, opts, { method: 'GET' })); },
+  post: function(p, body, opts) { return request(p, Object.assign({}, opts, { method: 'POST', body: body })); },
+  put: function(p, body, opts) { return request(p, Object.assign({}, opts, { method: 'PUT', body: body })); },
+  patch: function(p, body, opts) { return request(p, Object.assign({}, opts, { method: 'PATCH', body: body })); },
+  del: function(p, opts) { return request(p, Object.assign({}, opts, { method: 'DELETE' })); },
   refresh: refreshAccessToken,
-  API_BASE: API_BASE,
 };

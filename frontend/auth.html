@@ -2,15 +2,41 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="سجّل دخولك إلى أورا أو أنشئ حساباً جديداً للاستفادة من خدماتنا." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="canonical" href="https://aura-dev.com/auth.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aura-dev.com/auth.html" />
+  <meta property="og:title" content="تسجيل الدخول | أورا" />
+  <meta property="og:description" content="سجّل دخولك إلى أورا أو أنشئ حساباً جديداً للاستفادة من خدماتنا." />
+  <meta property="og:image" content="https://aura-dev.com/images/logo.png" />
+  <meta property="og:locale" content="ar_IQ" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="تسجيل الدخول | أورا" />
+  <meta name="twitter:description" content="سجّل دخولك إلى أورا أو أنشئ حساباً جديداً للاستفادة من خدماتنا." />
+
   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="aura-backgrounds.css">
   <title>أورا | الدخول</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
-<body>
+<body class="page-auth">
+
+    <!-- Aurora Background -->
+    <div class="aurora-bg" id="aurora-bg">
+      <div class="aurora-shape aurora-shape-1"></div>
+      <div class="aurora-shape aurora-shape-2"></div>
+      <div class="aurora-shape aurora-shape-3"></div>
+      <div class="aurora-layer aurora-1"></div>
+      <div class="aurora-layer aurora-2"></div>
+      <div class="aurora-layer aurora-3"></div>
+      <div class="snow-particles" id="snow-particles"></div>
+    </div>
   <nav class="navbar">
     <a href="index.html" class="logo" style="text-decoration:none">
       <i class="fas fa-water"></i> أورا
@@ -70,17 +96,41 @@
   <script>
     (function () {
       var h = window.location.hostname;
-      window.AURA_API = window.location.origin + '/api';
+      window.AURA_API = '/api';
     })();
   </script>
+
+  
+  <script src="js/aurora-bg.js"></script>
+  </body>
+</html>
+<script>
+  // امسح أي tokens قديمة (لمرة واحدة)
+  (function(){
+    var v = localStorage.getItem('aura_reset_v2');
+    if (!v) {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('token');
+      localStorage.setItem('aura_reset_v2', '1');
+    }
+  })();
+</script>
 
   <script type="module">
     import { login, register, bootstrapAuth } from './js/auth.js';
     import { showToast } from './js/notifications.js';
 
+    var params = new URLSearchParams(window.location.search);
+    var redirectTo = params.get('redirect') || null;
+
+    function getRedirectTarget(user) {
+      if (redirectTo) return redirectTo;
+      return user.role === 'ADMIN' ? 'admin.html' : 'dashboard.html';
+    }
+
     bootstrapAuth().then(function (u) {
       if (u) {
-        window.location.href = u.role === 'ADMIN' ? './admin.html' : './dashboard.html';
+        window.location.href = getRedirectTarget(u);
       }
     });
 
@@ -89,20 +139,20 @@
     var formLogin = document.getElementById('form-login');
     var formRegister = document.getElementById('form-register');
 
-    tabLogin.addEventListener('click', function () {
+    tabLogin.onclick = function () {
       tabLogin.classList.add('active');
       tabRegister.classList.remove('active');
       formLogin.style.display = '';
       formRegister.style.display = 'none';
-    });
-
-    tabRegister.addEventListener('click', function () {
+    };
+    tabRegister.onclick = function () {
       tabRegister.classList.add('active');
       tabLogin.classList.remove('active');
       formRegister.style.display = '';
       formLogin.style.display = 'none';
-    });
-      formLogin.addEventListener('submit', async function (e) {
+    };
+
+    formLogin.addEventListener('submit', async function (e) {
       e.preventDefault();
       var btn = document.getElementById('login-submit');
       var orig = btn.innerHTML;
@@ -110,11 +160,12 @@
       btn.innerHTML = '<span class="spinner"></span> جارٍ الدخول...';
       var fd = new FormData(formLogin);
       try {
-        var user = await login({ email: fd.get('email'), password: fd.get('password') });
+        var user = await login({ email: fd.get("email"), password: fd.get("password") });
+        localStorage.setItem("aura_user", JSON.stringify(user));
         showToast('تم تسجيل الدخول بنجاح', 'success');
         setTimeout(function () {
-          window.location.href = user.role === 'ADMIN' ? './admin.html' : './dashboard.html';
-        }, 500);
+          window.location.href = getRedirectTarget(user);
+        }, 400);
       } catch (err) {
         showToast(err.message || 'فشل تسجيل الدخول', 'error');
         btn.disabled = false;
@@ -130,15 +181,15 @@
       btn.innerHTML = '<span class="spinner"></span> جارٍ الإنشاء...';
       var fd = new FormData(formRegister);
       try {
-        await register({
+        var user = await register({
           fullName: fd.get('fullName'),
           email: fd.get('email'),
           password: fd.get('password'),
         });
         showToast('تم إنشاء الحساب بنجاح', 'success');
         setTimeout(function () {
-          window.location.href = './dashboard.html';
-        }, 500);
+          window.location.href = getRedirectTarget(user);
+        }, 400);
       } catch (err) {
         showToast(err.message || 'فشل إنشاء الحساب', 'error');
         btn.disabled = false;
@@ -146,18 +197,18 @@
       }
     });
 
-    document.getElementById('forgot-link').addEventListener('click', async function (e) {
+    document.getElementById('forgot-link').onclick = async function (e) {
       e.preventDefault();
       var email = prompt('أدخل بريدك الإلكتروني:');
       if (!email) return;
       try {
-        var apiModule = await import('./js/api.js');
-        await apiModule.api.post('/auth/forgot-password', { email: email });
+        var m = await import('./js/api.js');
+        await m.api.post('/auth/forgot-password', { email: email });
         showToast('إذا كان البريد مسجلاً، ستصلك رسالة', 'info');
       } catch (err) {
         showToast(err.message, 'error');
       }
-    });
+    };
   </script>
-</body>
+  </body>
 </html>

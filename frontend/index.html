@@ -2,8 +2,28 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="أورا — وكالة تطوير رقمي عراقية متخصصة في تصميم مواقع ومواقع إلكترونية فاخرة. HTML, CSS, JavaScript. تواصل معنا الآن." />
+  <meta name="keywords" content="تصميم مواقع, تطوير ويب, مواقع إلكترونية, وكالة رقمية, HTML, CSS, JavaScript, العراق, بابل, أورا" />
+  <meta name="author" content="Mohamed Baqir" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="canonical" href="https://aura-dev.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aura-dev.com/" />
+  <meta property="og:title" content="أورا | وكالة تطوير رقمي - مواقع ومواقع إلكترونية" />
+  <meta property="og:description" content="نبني مواقع إلكترونية متميزة بتقنيات HTML، CSS، JavaScript." />
+  <meta property="og:image" content="https://aura-dev.com/images/logo.png" />
+  <meta property="og:locale" content="ar_IQ" />
+  <meta property="og:site_name" content="أورا" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="أورا | وكالة تطوير رقمي" />
+  <meta name="twitter:description" content="نبني مواقع إلكترونية متميزة" />
+  <meta name="twitter:image" content="https://aura-dev.com/images/logo.png" />
+
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="aura-backgrounds.css">
     <title>أورا | تجربة رقمية فاخرة</title>
     <!-- استيراد خط عربي أنيق -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,10 +38,17 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
   </head>
-  <body>
+  <body class="page-index">
+
+    <!-- Background Layers -->
+    <div class="bg-layers" id="bg-layers">
+      <div class="bg-layer active" data-section="home" style="background-image: url('images/ice/ice-hero.jpg')"></div>
+      <div class="bg-layer" data-section="features" style="background-image: url('images/ice/ice-features.jpg')"></div>
+      <div class="bg-layer" data-section="stats" style="background-image: url('images/ice/ice-stats.jpg')"></div>
+      <div class="bg-layer" data-section="social-section" style="background-image: url('images/ice/ice-social.jpg')"></div>
+    </div>
+
     <!-- خلفية موجية مائية -->
-    <div class="water-bg">
-      <div class="wave"></div>
       <div class="wave"></div>
       <div class="wave"></div>
     </div>
@@ -36,17 +63,32 @@
         <li><a href="#home">الرئيسية</a></li>
         <li><a href="#features">الميزات</a></li>
         <li><a href="#stats">احصائياتنا</a></li>
-        <li><a href="#contact">اتصل بنا</a></li>
+        <li><a href="#social-section">سوشيال ميديا</a></li>
       </ul>
       <div id="nav-auth-slot">
   <a href="auth.html" class="nav-btn" style="text-decoration:none">
-    <i class="fas fa-rocket"></i> ابدأ الآن
+    تسجيل دخول
   </a>
 </div>
     </nav>
 
     <!-- القسم الرئيسي -->
     <section class="hero" id="home">
+      <div class="hero-slideshow-full" id="hero-slideshow">
+        <div class="hero-slide active" data-section="home">
+          <img src="images/hero-1.jpg" alt="1" />
+        </div>
+        <div class="hero-slide" data-section="features">
+          <img src="images/hero-2.jpg" alt="2" />
+        </div>
+        <div class="hero-slide" data-section="stats">
+          <img src="images/hero-3.jpg" alt="3" />
+        </div>
+        <div class="hero-slide" data-section="contact">
+          <img src="images/hero-4.jpg" alt="4" />
+        </div>
+      </div>
+
       <div class="container">
         <div class="hero-content">
           <div class="hero-badge">
@@ -59,15 +101,13 @@
             تُنسى.
           </p>
           <div class="hero-buttons">
-            <button class="btn-primary">
-              <i class="fas fa-play"></i> استكشف الآن
-            </button>
-            <button class="btn-secondary">
-              <i class="fas fa-info-circle"></i> تعرف علينا
-            </button>
+            <a href="projects.html" class="btn-primary" style="text-decoration:none">
+              <i class="fas fa-water"></i> مشاريعنا
+            </a>
+            <a href="contact.html" class="btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.6rem"><i class="fas fa-comments"></i> تواصل معنا</a>
           </div>
         </div>
-      </div>
+        </div>
     </section>
 
     <!-- قسم الميزات -->
@@ -176,113 +216,43 @@
     </section>
 
     <!-- تذييل الصفحة -->
-    <section class="features" id="contact-form-section">
-  <div class="container" style="max-width:720px">
-    <h2 class="section-title">تواصل معنا</h2>
-    <p class="section-subtitle">سنرد عليك في أقرب وقت ممكن</p>
-    <div class="card">
-      <form id="contact-form">
-        <div class="form-group">
-          <label>الاسم</label>
-          <input type="text" name="name" required maxlength="80" />
+    
+    <!-- قسم سوشيال ميديا -->
+    <section class="features" id="social-section">
+      <div class="container" style="max-width:900px">
+        <h2 class="section-title">تابعنا على</h2>
+        <p class="section-subtitle">ابقَ على تواصل معنا عبر منصاتنا</p>
+
+        <div class="social-grid">
+          <a href="https://x.com/m44_aw" target="_blank" rel="noopener noreferrer" class="social-card">
+            <i class="fab fa-twitter"></i>
+            <span>تويتر / X</span>
+          </a>
+          <a href="https://www.instagram.com/mitsoprg" target="_blank" rel="noopener noreferrer" class="social-card">
+            <i class="fab fa-instagram"></i>
+            <span>إنستغرام</span>
+          </a>
+          <a href="https://www.linkedin.com/in/%D9%85%D8%AD%D9%85%D8%AF-%D8%A8%D8%A7%D9%82%D8%B1-7a2856438" target="_blank" rel="noopener noreferrer" class="social-card">
+            <i class="fab fa-linkedin-in"></i>
+            <span>لينكد إن</span>
+          </a>
+          <a href="https://youtube.com/@i_mitso" target="_blank" rel="noopener noreferrer" class="social-card">
+            <i class="fab fa-youtube"></i>
+            <span>يوتيوب</span>
+          </a>
         </div>
-        <div class="form-group">
-          <label>البريد الإلكتروني</label>
-          <input type="email" name="email" required />
-        </div>
-        <div class="form-group">
-          <label>الرسالة</label>
-          <textarea name="message" required minlength="10" maxlength="2000"></textarea>
-        </div>
-        <button type="submit" class="btn-primary" id="contact-submit">
-          <i class="fas fa-paper-plane"></i> إرسال
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
-    <footer class="footer" id="contact"></footer>
-      <div class="footer-content">
-        <div class="footer-logo">أورا</div>
-        <ul class="footer-links">
-          <li><a href="#home">الرئيسية</a></li>
-          <li><a href="#features">الميزات</a></li>
-          <li><a href="#stats">الأرقام</a></li>
-          <li><a href="#contact">اتصل بنا</a></li>
-        </ul>
-        <div class="footer-social">
-          <a href="#" class="social-icon" aria-label="تويتر X "
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a href="https://www.instagram.com/mitsoprg" class="social-icon" aria-label="انستغرام"
-            ><i class="fab fa-instagram"></i
-          ></a>
-          <a href="https://linkedin.com/in/%D9%85%D8%AD%D9%85%D8%AF-undefined-7a2856438" class="social-icon" aria-label="لينكد إن"
-            ><i class="fab fa-linkedin-in"></i
-          ></a>
-          <a href="#" class="social-icon" aria-label="يوتيوب"
-            ><i class="fab fa-youtube"></i
-          ></a>
-        </div>
-        <p class="footer-copy">جميع الحقوق محفوظة باسم ميتسو |>-<|</p>
       </div>
-    </footer>
+    </section>
+
 <script>
       (function () {
         var host = window.location.hostname;
-        window.AURA_API = window.location.origin + '/api';
+        window.AURA_API = '/api';
       })();
     </script>
 
-    <script type="module">
-      import { bootstrapAuth } from './js/auth.js';
-      import { showToast } from './js/notifications.js';
-      import { api } from './js/api.js';
-
-      bootstrapAuth().then(function (u) {
-        var slot = document.getElementById('nav-auth-slot');
-        if (!slot) return;
-        if (u) {
-          var name = (u.profile && u.profile.fullName) || 'حسابي';
-          var href = u.role === 'ADMIN' ? 'admin.html' : 'dashboard.html';
-          var link = document.createElement('a');
-          link.href = href;
-          link.className = 'nav-btn';
-          link.style.textDecoration = 'none';
-          link.innerHTML = '<i class="fas fa-user"></i> ' + name;
-          slot.innerHTML = '';
-          slot.appendChild(link);
-        }
-      });
-
-      var contactForm = document.getElementById('contact-form');
-      if (contactForm) {
-        contactForm.addEventListener('submit', async function (event) {
-          event.preventDefault();
-          var submitBtn = document.getElementById('contact-submit');
-          var originalHTML = submitBtn.innerHTML;
-          submitBtn.disabled = true;
-          submitBtn.innerHTML = '<span class="spinner"></span> جارٍ الإرسال...';
-
-          var formData = new FormData(contactForm);
-
-          try {
-            await api.post('/contact', {
-              name: formData.get('name'),
-              email: formData.get('email'),
-              message: formData.get('message')
-            });
-            showToast('تم إرسال رسالتك بنجاح', 'success');
-            contactForm.reset();
-          } catch (err) {
-            showToast(err.message || 'فشل الإرسال', 'error');
-          } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalHTML;
-          }
-        });
-      }
-    </script>
-    <div class="glow-line"></div>
+    
+  <script src="js/bg-scroll.js"></script>
+  <script type="module" src="js/nav-user.js"></script>
   </body>
 </html>

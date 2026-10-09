@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="اختبر ذاكرتك مع لعبة الذاكرة التفاعلية من أورا." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="canonical" href="https://aura-dev.com/memory.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aura-dev.com/memory.html" />
+  <meta property="og:title" content="صفحة ترفيهية | أورا" />
+  <meta property="og:description" content="اختبر ذاكرتك مع لعبة الذاكرة التفاعلية من أورا." />
+  <meta property="og:image" content="https://aura-dev.com/images/logo.png" />
+  <meta property="og:locale" content="ar_IQ" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="صفحة ترفيهية | أورا" />
+  <meta name="twitter:description" content="اختبر ذاكرتك مع لعبة الذاكرة التفاعلية من أورا." />
+
+  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="aura-backgrounds.css">
+  <title>أورا | لعبة الذاكرة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body class="page-memory">
+  <nav class="navbar">
+    <a href="index.html" class="logo" style="text-decoration:none">
+      <i class="fas fa-water"></i> أورا
+    </a>
+    <div><a href="index.html" class="nav-btn" style="text-decoration:none">الرئيسية</a></div>
+  </nav>
+
+  <main class="page-wrap container">
+    <h1 class="section-title">لعبة الذاكرة</h1>
+    <p class="section-subtitle">اقلب البطاقات واعثر على الأزواج المتطابقة</p>
+
+    <div class="memory-stats">
+      <div class="memory-stat">
+        <i class="fas fa-star"></i>
+        <span class="memory-stat-label">النقاط</span>
+        <span class="memory-stat-value" id="score">0 / 10</span>
+      </div>
+      <div class="memory-stat">
+        <i class="fas fa-hand-pointer"></i>
+        <span class="memory-stat-label">الحركات</span>
+        <span class="memory-stat-value" id="moves">0</span>
+      </div>
+      <div class="memory-stat">
+        <i class="fas fa-clock"></i>
+        <span class="memory-stat-label">الوقت</span>
+        <span class="memory-stat-value" id="timer">00:00</span>
+      </div>
+      <div class="memory-stat">
+        <i class="fas fa-trophy"></i>
+        <span class="memory-stat-label">أفضل نتيجة</span>
+        <span class="memory-stat-value" id="best">—</span>
+      </div>
+    </div>
+
+    <div class="memory-board" id="memory-board"></div>
+
+    <div class="memory-actions">
+      <button class="btn-primary" id="restart-btn">
+        <i class="fas fa-rotate-right"></i> إعادة اللعب
+      </button>
+      <a href="index.html" class="btn-secondary" style="text-decoration:none">
+        <i class="fas fa-home"></i> العودة للموقع
+      </a>
+    </div>
+  </main>
+
+  <div class="memory-win-overlay" id="win-overlay">
+    <div class="memory-win-card">
+      <div class="memory-win-icon">🎉</div>
+      <h2>مبروك!</h2>
+      <p>لقد أكملت اللعبة</p>
+      <div class="memory-win-stats">
+        <div>
+          <span>الحركات</span>
+          <strong id="win-moves">0</strong>
+        </div>
+        <div>
+          <span>الوقت</span>
+          <strong id="win-time">00:00</strong>
+        </div>
+      </div>
+      <div class="memory-win-actions">
+        <button class="btn-primary" id="play-again-btn">
+          <i class="fas fa-rotate-right"></i> العب مرة أخرى
+        </button>
+        <a href="index.html" class="btn-secondary" style="text-decoration:none">
+          <i class="fas fa-home"></i> الرئيسية
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/memory.js"></script>
+</body>
+</html>

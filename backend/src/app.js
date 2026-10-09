@@ -12,6 +12,8 @@ import userRoutes from './routes/user.routes.js';
 import contactRoutes from './routes/contact.routes.js';
 import notificationRoutes from './routes/notification.routes.js';
 import adminRoutes from './routes/admin.routes.js';
+import chatRoutes from './routes/chat.routes.js';
+import adminChatRoutes from './routes/admin-chat.routes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const frontendPath = path.resolve(__dirname, '../../frontend');
@@ -32,6 +34,8 @@ export function createApp() {
   app.use('/api/users', userRoutes);
   app.use('/api/contact', contactRoutes);
   app.use('/api/notifications', notificationRoutes);
+  app.use('/api/chat', chatRoutes);
+  app.use('/api/admin/chats', adminChatRoutes);
   app.use('/api/admin', adminRoutes);
 
   app.use(express.static(frontendPath));

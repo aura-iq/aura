@@ -31,6 +31,23 @@ export const register = asyncHandler(async (req, res) => {
   });
 
   res.cookie(REFRESH_COOKIE, raw, cookieOpts);
+  // إشعار للأدمن: حساب جديد
+  try {
+    const admins = await prisma.user.findMany({ where: { role: 'ADMIN' }, select: { id: true } });
+    if (admins.length) {
+      await prisma.notification.createMany({
+        data: admins.map(function(a) {
+          return {
+            userId: a.id,
+            title: 'حساب جديد',
+            body: 'المستخدم ' + email + ' أنشأ حساباً جديداً.',
+            type: 'signup',
+          };
+        }),
+      });
+    }
+  } catch (e) { console.error('notif signup err', e); }
+
   res.status(201).json({ success: true, data: { user, accessToken } });
 });
 
@@ -53,6 +70,26 @@ export const login = asyncHandler(async (req, res) => {
       profile: { select: { fullName: true, bio: true, phone: true, avatarUrl: true } },
     },
   });
+
+  // إشعار للأدمن: تسجيل دخول
+  try {
+    const admins = await prisma.user.findMany({
+      where: { role: 'ADMIN', id: { not: user.id } },
+      select: { id: true },
+    });
+    if (admins.length) {
+      await prisma.notification.createMany({
+        data: admins.map(function(a) {
+          return {
+            userId: a.id,
+            title: 'تسجيل دخول',
+            body: 'المستخدم ' + email + ' سجّل دخول الآن.',
+            type: 'login',
+          };
+        }),
+      });
+    }
+  } catch (e) { console.error('notif login err', e); }
 
   res.json({ success: true, data: { user: safeUser, accessToken } });
 });

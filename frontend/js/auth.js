@@ -14,11 +14,7 @@ export async function login(data) {
 }
 
 export async function logout() {
-  try {
-    await api.post('/auth/logout');
-  } catch (e) {
-    // noop
-  }
+  try { await api.post('/auth/logout'); } catch (e) {}
   setAccessToken(null);
 }
 
@@ -32,6 +28,11 @@ export async function fetchMe() {
 }
 
 export async function bootstrapAuth() {
+  // 1. جرّب الـ token المخزّن أولاً
+  const u = await fetchMe();
+  if (u) return u;
+
+  // 2. إذا فشل، جرّب refresh
   try {
     await api.refresh();
     return await fetchMe();
@@ -41,10 +42,10 @@ export async function bootstrapAuth() {
 }
 
 export function requireAuthOrRedirect() {
-  return bootstrapAuth().then(function (user) {
+  return bootstrapAuth().then(function(user) {
     if (!user) {
       showToast('يرجى تسجيل الدخول', 'warning');
-      setTimeout(function () { window.location.href = 'auth.html'; }, 800);
+      setTimeout(function() { window.location.href = 'auth.html'; }, 800);
       return null;
     }
     return user;
@@ -52,10 +53,10 @@ export function requireAuthOrRedirect() {
 }
 
 export function requireAdminOrRedirect() {
-  return requireAuthOrRedirect().then(function (user) {
+  return requireAuthOrRedirect().then(function(user) {
     if (user && user.role !== 'ADMIN') {
       showToast('ممنوع الوصول', 'error');
-      setTimeout(function () { window.location.href = 'dashboard.html'; }, 800);
+      setTimeout(function() { window.location.href = 'dashboard.html'; }, 800);
       return null;
     }
     return user;

@@ -1,0 +1,159 @@
+
+/* ===== أورا | خلفيات جليدية ===== */
+/* نسخة نهائية — بدون تعارض */
+
+/* Body داكن */
+body {
+  background: #050812 !important;
+}
+
+/* إخفاء الخلفية الموجية والخط */
+.water-bg,
+.water-bg .wave,
+.wave,
+.glow-line {
+  display: none !important;
+}
+
+/* الأقسام — خلفيات ثابتة (بدون bg-layers) */
+.hero {
+  background-image: 
+    linear-gradient(180deg,
+      rgba(5, 8, 18, 0.7) 0%,
+      rgba(8, 12, 25, 0.5) 50%,
+      rgba(5, 8, 18, 0.85) 100%),
+    url('images/ice/ice-hero.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.features {
+  background-image: 
+    linear-gradient(180deg,
+      rgba(6, 10, 22, 0.7) 0%,
+      rgba(12, 18, 35, 0.55) 50%,
+      rgba(6, 10, 22, 0.85) 100%),
+    url('images/ice/ice-features.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.stats {
+  background-image: 
+    linear-gradient(180deg,
+      rgba(4, 8, 20, 0.7) 0%,
+      rgba(10, 16, 32, 0.55) 50%,
+      rgba(4, 8, 20, 0.85) 100%),
+    url('images/ice/ice-stats.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+#social-section {
+  background-image: 
+    linear-gradient(180deg,
+      rgba(5, 10, 22, 0.75) 0%,
+      rgba(12, 20, 38, 0.6) 50%,
+      rgba(5, 10, 22, 0.88) 100%),
+    url('images/ice/ice-social.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* صفحات أخرى */
+body.page-projects {
+  background-image: 
+    linear-gradient(180deg,
+      rgba(6, 10, 24, 0.78) 0%,
+      rgba(14, 22, 42, 0.65) 50%,
+      rgba(6, 10, 24, 0.88) 100%),
+    url('images/ice/ice-projects.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+}
+
+body.page-contact {
+  background-image: 
+    linear-gradient(180deg,
+      rgba(5, 9, 22, 0.78) 0%,
+      rgba(12, 20, 38, 0.65) 50%,
+      rgba(5, 9, 22, 0.88) 100%),
+    url('images/ice/ice-contact.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+}
+
+body.page-auth {
+  background-image: 
+    linear-gradient(180deg,
+      rgba(4, 8, 20, 0.85) 0%,
+      rgba(10, 16, 32, 0.75) 50%,
+      rgba(4, 8, 20, 0.92) 100%),
+    url('images/ice/ice-auth.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+}
+
+/* إخفاء bg-layers — نستخدم الخلفيات المباشرة بدل */
+.bg-layers {
+  display: none !important;
+}
+
+/* ===== طبقة خلفية ديناميكية ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: 
+    linear-gradient(180deg,
+      rgba(5, 8, 18, 0.7) 0%,
+      rgba(8, 12, 25, 0.5) 50%,
+      rgba(5, 8, 18, 0.85) 100%),
+    url('images/ice/ice-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1.5s ease-in-out, opacity 1.5s ease-in-out;
+  opacity: 1;
+}
+
+/* الأقسام شفافة — عشان نشوف الـ body::before */
+.hero,
+.features,
+.stats,
+#social-section {
+  background: transparent !important;
+  background-image: none !important;
+  min-height: 100vh !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* النافبار ثابت فوق */
+.navbar {
+  z-index: 1000 !important;
+  position: fixed !important;
+}
+
+/* ===== استخدام المتغيّر ===== */
+:root {
+  --aura-bg: 
+    linear-gradient(180deg, rgba(5,8,18,0.7) 0%, rgba(8,12,25,0.5) 50%, rgba(5,8,18,0.85) 100%),
+    url('images/ice/ice-hero.jpg');
+}
+
+body::before {
+  background-image: var(--aura-bg);
+  transition: background-image 1.2s ease-in-out;
+}

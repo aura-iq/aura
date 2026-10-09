@@ -1,0 +1,1461 @@
+/* ===== أورا | خلفيات جليدية داكنة (Ice Dark) ===== */
+/* نسخة نظيفة ومبسطة */
+
+/* ===== Body خالص داكن ===== */
+body {
+  background: #050812 !important;
+  background-image: none !important;
+}
+
+/* ===== إخفاء الخلفية الموجية القديمة ===== */
+.water-bg,
+.water-bg .wave,
+.wave {
+  display: none !important;
+}
+
+/* ===== إخفاء الخط المتوهج ===== */
+.glow-line {
+  display: none !important;
+}
+
+/* ===== Background Layers ===== */
+.bg-layers {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.bg-layer.active {
+  opacity: 1;
+}
+
+/* ===== طبقة تعتيم فوق الخلفية ===== */
+.bg-layers::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg,
+    rgba(5, 8, 18, 0.7) 0%,
+    rgba(5, 8, 18, 0.5) 50%,
+    rgba(5, 8, 18, 0.85) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== المحتوى فوق الخلفية ===== */
+.navbar,
+.hero,
+.features,
+.stats,
+section,
+footer,
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== الأقسام شفافة (بدون خلفية خاصة) ===== */
+.hero,
+.features,
+.stats,
+#social-section {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* ===== إلغاء الـ hero-slideshow القديم (صور الجبال) ===== */
+.hero-slideshow-full,
+#hero-slideshow,
+.hero-slideshow-full .hero-slide,
+.hero-slide {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* ===== إلغاء أي خلفية صور جبال ===== */
+.hero img,
+.hero-slide img {
+  display: none !important;
+}
+
+/* ===== إصلاح النافبار ===== */
+.navbar {
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateZ(0) !important;
+  z-index: 1000 !important;
+}
+
+/* ===== لا نلمس باقي العناصر ===== */
+.hero,
+.features,
+.stats,
+section,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== المحتوى فوق الخلفية ===== */
+.hero .container,
+.features .container,
+.stats .container,
+#social-section .container,
+section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== تسريع تبديل الخلفيات ===== */
+.bg-layer {
+  transition: opacity 0.6s ease-out !important;
+}
+
+/* ===== Slideshow تلقائي لصفحة المشاريع ===== */
+body.page-projects .bg-layer {
+  transition: opacity 1.2s ease-in-out !important;
+}
+
+body.page-projects .bg-layer.active {
+  opacity: 1 !important;
+}
+
+/* ===== Glassmorphism لصفحة المشاريع ===== */
+
+/* 1. البطاقة الكبيرة (المربع الرمادي) */
+.project-category {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 28px !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  padding: 2rem !important;
+  margin-bottom: 2rem !important;
+  transition: all 0.4s ease !important;
+}
+
+.project-category:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(120, 200, 255, 0.25) !important;
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.45),
+    0 0 60px rgba(80, 150, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+/* 2. البطاقات الداخلية (الكاردات الصغيرة) */
+.project-card {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  transition: all 0.35s ease !important;
+  text-decoration: none !important;
+}
+
+.project-card:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(120, 200, 255, 0.35) !important;
+  transform: translateY(-6px) !important;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(80, 150, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+/* 3. بطاقات "قريباً" */
+.project-card.coming {
+  opacity: 0.75 !important;
+}
+
+.project-card.coming:hover {
+  opacity: 1 !important;
+  transform: translateY(-4px) !important;
+}
+
+/* 4. أيقونة القسم */
+.project-category-icon {
+  background: rgba(120, 200, 255, 0.12) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(120, 200, 255, 0.25) !important;
+  border-radius: 18px !important;
+  color: #7cc4ff !important;
+  box-shadow: 0 4px 20px rgba(80, 150, 255, 0.15) !important;
+}
+
+/* 5. عناوين الأقسام */
+.project-category-header h2 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.project-category-header p {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* 6. بطاقة المشروع الداخلية */
+.project-card-icon {
+  background: rgba(120, 200, 255, 0.1) !important;
+  border: 1px solid rgba(120, 200, 255, 0.2) !important;
+  color: #7cc4ff !important;
+}
+
+.project-card h3 {
+  color: #ffffff !important;
+}
+
+.project-card p {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.project-card-cta {
+  color: #7cc4ff !important;
+  font-weight: 700 !important;
+}
+
+/* 7. العنوان الرئيسي */
+.section-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* 8. Responsive */
+@media (max-width: 768px) {
+  .project-category {
+    padding: 1.5rem !important;
+    border-radius: 22px !important;
+  }
+  .project-card {
+    border-radius: 16px !important;
+  }
+}
+
+/* ===== بطاقات "قريباً" — بلور خفيف ===== */
+.project-card.coming {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  opacity: 0.7 !important;
+}
+
+.project-card.coming:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-color: rgba(120, 200, 255, 0.15) !important;
+  opacity: 0.85 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 
+    0 6px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+/* نص "قريباً" — لون مميز */
+.project-card.coming .project-card-cta {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-style: italic !important;
+}
+
+/* أيقونة "قريباً" — باهتة */
+.project-card.coming .project-card-icon {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* ===== تخفيف بلور القاعدة الحاملة للكاردات ===== */
+.project-category {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.project-category:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+
+/* ==========================================
+   AURORA AUTH — الحاوية والمربعات
+   ========================================== */
+
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center,
+    #0a1428 0%,
+    #050812 50%,
+    #02040a 100%);
+  pointer-events: none;
+}
+
+/* إخفاء كل شي قديم */
+.snow-particles,
+.snowflake,
+.aurora-layer,
+.aurora-1,
+.aurora-2,
+.aurora-3,
+.aurora-bg::before,
+.aurora-bg::after {
+  display: none !important;
+}
+
+/* المربعات الثلاثة */
+.aurora-shape {
+  position: fixed !important;
+  border-radius: 50% !important;
+  filter: blur(100px) !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  will-change: transform, opacity;
+}
+
+.aurora-shape-1 {
+  width: 600px !important;
+  height: 600px !important;
+  top: -200px !important;
+  right: -200px !important;
+  background: radial-gradient(circle,
+    rgba(80, 150, 255, 0.85) 0%,
+    rgba(50, 100, 200, 0.4) 40%,
+    transparent 70%) !important;
+  animation: shapeA 12s ease-in-out infinite !important;
+}
+
+.aurora-shape-2 {
+  width: 550px !important;
+  height: 550px !important;
+  bottom: -200px !important;
+  left: -200px !important;
+  background: radial-gradient(circle,
+    rgba(140, 80, 255, 0.8) 0%,
+    rgba(80, 50, 180, 0.35) 40%,
+    transparent 70%) !important;
+  animation: shapeB 12s ease-in-out infinite !important;
+}
+
+.aurora-shape-3 {
+  width: 480px !important;
+  height: 480px !important;
+  top: 40% !important;
+  left: 60% !important;
+  background: radial-gradient(circle,
+    rgba(60, 200, 220, 0.75) 0%,
+    rgba(30, 120, 160, 0.3) 40%,
+    transparent 70%) !important;
+  animation: shapeC 12s ease-in-out infinite !important;
+}
+
+@keyframes shapeA {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  50% { transform: translate(-250px, 200px) scale(1.3); opacity: 0.95; }
+}
+
+@keyframes shapeB {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+  50% { transform: translate(250px, -200px) scale(1.3); opacity: 0.95; }
+}
+
+@keyframes shapeC {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-200px, -150px) scale(1.4); opacity: 0.85; }
+}
+
+/* ==========================================
+   AURORA AUTH — التخطيط والبطاقة
+   ========================================== */
+
+body.page-auth {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body.page-auth .page-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 100px 1rem 2rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+body.page-auth .card {
+  margin: 0 auto !important;
+  max-width: 520px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 3 !important;
+  background: rgba(15, 25, 45, 0.75) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border: 1px solid rgba(120, 200, 255, 0.2) !important;
+  border-radius: 28px !important;
+  padding: 2.5rem !important;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 100px rgba(80, 150, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+body.page-auth .navbar {
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) translateZ(0) !important;
+  width: calc(100% - 2rem) !important;
+  max-width: 1300px !important;
+  margin: 0 !important;
+  z-index: 1000 !important;
+}
+
+body.page-auth input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(120, 200, 255, 0.2) !important;
+  color: #ffffff !important;
+  border-radius: 14px !important;
+  font-size: 16px !important;
+}
+
+body.page-auth input:focus {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(120, 200, 255, 0.5) !important;
+  box-shadow: 0 0 0 4px rgba(80, 150, 255, 0.15) !important;
+}
+
+body.page-auth label {
+  color: #ffffff !important;
+}
+
+.auth-tabs {
+  position: relative;
+  z-index: 10 !important;
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-tabs button {
+  padding: 0.7rem 1.4rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(120, 200, 255, 0.2) !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-weight: 600;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 10 !important;
+  transition: all 0.3s ease;
+}
+
+.auth-tabs button:hover {
+  background: rgba(120, 200, 255, 0.12) !important;
+  border-color: rgba(120, 200, 255, 0.4) !important;
+  color: #fff !important;
+}
+
+.auth-tabs button.active {
+  background: linear-gradient(135deg, rgba(120, 200, 255, 0.25), rgba(140, 80, 255, 0.2)) !important;
+  color: #fff !important;
+  border-color: rgba(120, 200, 255, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(80, 150, 255, 0.25) !important;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  body.page-auth .page-wrap {
+    padding: 90px 0.8rem 1.5rem !important;
+  }
+  
+  body.page-auth .card {
+    padding: 1.5rem !important;
+    border-radius: 22px !important;
+  }
+  
+  body.page-auth .navbar {
+    top: 12px !important;
+    width: calc(100% - 1rem) !important;
+  }
+  
+  .aurora-shape-1 { width: 320px !important; height: 320px !important; }
+  .aurora-shape-2 { width: 300px !important; height: 300px !important; }
+  .aurora-shape-3 { width: 280px !important; height: 280px !important; }
+  
+  .aurora-shape-1,
+  .aurora-shape-2,
+  .aurora-shape-3 {
+    filter: blur(70px) !important;
+  }
+}
+
+/* ==========================================
+   إصلاح: كل قسم ياخذ شاشة كاملة
+   ========================================== */
+
+.hero,
+.features,
+.stats,
+#social-section {
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  padding: 6rem 2rem !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+}
+
+/* المحتوى الداخلي */
+.hero > .container,
+.features > .container,
+.stats > .container,
+#social-section > .container {
+  width: 100% !important;
+  max-width: 1300px !important;
+}
+
+/* الموبايل — أطول شوي */
+@media (max-width: 768px) {
+  .hero,
+  .features,
+  .stats,
+  #social-section {
+    min-height: 100vh !important;
+    padding: 5rem 1rem !important;
+  }
+}
+
+/* ==========================================
+   إصلاح: Hero Content وسط تماماً
+   ========================================== */
+
+.hero,
+section.hero,
+#home {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  padding: 6rem 1rem !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* الحاوية الداخلية */
+.hero .container,
+.hero .hero-content,
+.hero > div {
+  width: 100% !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* العنوان والنص وسط */
+.hero h1,
+.hero .hero-title,
+.hero p,
+.hero .hero-subtitle,
+.hero .hero-badge {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* الأزرار وسط */
+.hero .hero-buttons,
+.hero .btn-primary,
+.hero .btn-secondary {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  .hero,
+  section.hero,
+  #home {
+    padding: 5rem 1rem !important;
+    min-height: 100vh !important;
+  }
+  
+  .hero .container,
+  .hero .hero-content,
+  .hero > div {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+}
+
+/* ==========================================
+   إصلاح bg-layers على الموبايل
+   ========================================== */
+
+@media (max-width: 768px) {
+  /* نجعل الخلفية مشغولة بـ scroll بدل fixed */
+  .bg-layers {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important; /* للموبايلات الحديثة */
+    z-index: 0 !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+    background: #050812 !important;
+  }
+  
+  .bg-layer {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: scroll !important;
+    background-repeat: no-repeat !important;
+    opacity: 0 !important;
+    transition: opacity 0.7s ease-in-out !important;
+    will-change: opacity !important;
+  }
+  
+  .bg-layer.active {
+    opacity: 1 !important;
+  }
+  
+  /* المحتوى فوق الخلفية */
+  body > *:not(.bg-layers) {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* ==========================================
+   خطوط دوارة حول بطاقة Auth
+   ========================================== */
+
+/* البطاقة لازم تكون relative */
+body.page-auth .card {
+  position: relative !important;
+  overflow: visible !important;
+  isolation: isolate !important;
+}
+
+/* طبقة للخطوط الدوارة — خلف البطاقة */
+body.page-auth .card::before,
+body.page-auth .card::after {
+  content: "";
+  position: absolute;
+  border-radius: 32px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* الخط الأول — يدور باتجاه عقارب الساعة */
+body.page-auth .card::before {
+  inset: -3px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 90deg,
+    rgba(80, 180, 255, 0.9) 180deg,
+    rgba(140, 200, 255, 1) 200deg,
+    transparent 270deg,
+    transparent 360deg
+  );
+  animation: rotateLine1 6s linear infinite;
+  filter: blur(1px);
+}
+
+/* الخط الثاني — يدور بعكس عقارب الساعة */
+body.page-auth .card::after {
+  inset: -6px;
+  background: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    transparent 120deg,
+    rgba(140, 80, 255, 0.7) 200deg,
+    rgba(180, 120, 255, 0.9) 220deg,
+    transparent 300deg,
+    transparent 360deg
+  );
+  animation: rotateLine2 9s linear infinite;
+  filter: blur(3px);
+}
+
+/* قناع داخلي — يخلي الخطوط بس على الحدود */
+body.page-auth .card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* الخلفية الداخلية للبطاقة (عشان ما نكشف الخطوط داخلها) */
+body.page-auth .card {
+  background-clip: padding-box !important;
+}
+
+/* الحركات */
+@keyframes rotateLine1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateLine2 {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  body.page-auth .card::before {
+    inset: -3px;
+    border-radius: 24px;
+  }
+  body.page-auth .card::after {
+    inset: -6px;
+    border-radius: 26px;
+    filter: blur(2px);
+  }
+}
+
+/* ==========================================
+   إصلاح — خطوط دوارة على الحواف فقط
+   ========================================== */
+
+body.page-auth .card {
+  position: relative !important;
+  overflow: visible !important;
+  background-clip: padding-box !important;
+}
+
+/* الخط الأول — يدور يمين */
+body.page-auth .card::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 32px;
+  padding: 3px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 90deg,
+    rgba(80, 180, 255, 0.9) 180deg,
+    rgba(140, 200, 255, 1) 200deg,
+    transparent 270deg,
+    transparent 360deg
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: rotateLine1 6s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* الخط الثاني — يدور يسار (عكسي) */
+body.page-auth .card::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 36px;
+  padding: 2px;
+  background: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    transparent 120deg,
+    rgba(140, 80, 255, 0.7) 200deg,
+    rgba(180, 120, 255, 0.9) 220deg,
+    transparent 300deg,
+    transparent 360deg
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: rotateLine2 9s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(1px);
+}
+
+/* المحتوى فوق الخطوط */
+body.page-auth .card > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes rotateLine1 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateLine2 {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ==========================================
+   مربعات كاملة تدور خلف بطاقة Auth
+   ========================================== */
+
+body.page-auth .card {
+  position: relative !important;
+  overflow: visible !important;
+  z-index: 2 !important;
+}
+
+/* إلغاء الخطوط السابقة */
+body.page-auth .card::before,
+body.page-auth .card::after {
+  display: none !important;
+}
+
+/* حاوية المربعات الدوارة — تلف البطاقة */
+body.page-auth .page-wrap {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+/* المربع الأول — يدور يمين */
+body.page-auth .page-wrap::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 620px;
+  height: 620px;
+  margin-top: -310px;
+  margin-left: -310px;
+  border-radius: 40px;
+  background: linear-gradient(135deg,
+    rgba(80, 180, 255, 0.35) 0%,
+    rgba(120, 200, 255, 0.15) 50%,
+    rgba(60, 140, 255, 0.25) 100%);
+  border: 1.5px solid rgba(120, 200, 255, 0.5);
+  box-shadow: 
+    0 0 60px rgba(80, 180, 255, 0.35),
+    inset 0 0 40px rgba(80, 180, 255, 0.15);
+  animation: rotateSquare1 20s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(0.5px);
+}
+
+/* المربع الثاني — يدور يسار (عكسي) */
+body.page-auth .page-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: 700px;
+  margin-top: -350px;
+  margin-left: -350px;
+  border-radius: 50px;
+  background: linear-gradient(135deg,
+    rgba(140, 80, 255, 0.25) 0%,
+    rgba(180, 120, 255, 0.1) 50%,
+    rgba(100, 60, 200, 0.2) 100%);
+  border: 1.5px solid rgba(160, 120, 255, 0.4);
+  box-shadow: 
+    0 0 80px rgba(140, 80, 255, 0.3),
+    inset 0 0 50px rgba(140, 80, 255, 0.12);
+  animation: rotateSquare2 30s linear infinite;
+  z-index: -2;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+/* الحركات */
+@keyframes rotateSquare1 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateSquare2 {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  body.page-auth .page-wrap::before {
+    width: 380px;
+    height: 380px;
+    margin-top: -190px;
+    margin-left: -190px;
+    border-radius: 30px;
+  }
+  body.page-auth .page-wrap::after {
+    width: 440px;
+    height: 440px;
+    margin-top: -220px;
+    margin-left: -220px;
+    border-radius: 36px;
+  }
+}
+
+/* ==========================================
+   توسيع المسافة بين المربعات والبطاقة
+   ========================================== */
+
+/* المربع الأول — أكبر وأبعد */
+body.page-auth .page-wrap::before {
+  width: 780px !important;
+  height: 780px !important;
+  margin-top: -390px !important;
+  margin-left: -390px !important;
+  border-radius: 50px !important;
+  opacity: 0.7 !important;
+}
+
+/* المربع الثاني — أكبر وأبعد أكثر */
+body.page-auth .page-wrap::after {
+  width: 950px !important;
+  height: 950px !important;
+  margin-top: -475px !important;
+  margin-left: -475px !important;
+  border-radius: 60px !important;
+  opacity: 0.5 !important;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  body.page-auth .page-wrap::before {
+    width: 500px !important;
+    height: 500px !important;
+    margin-top: -250px !important;
+    margin-left: -250px !important;
+    border-radius: 36px !important;
+  }
+  body.page-auth .page-wrap::after {
+    width: 620px !important;
+    height: 620px !important;
+    margin-top: -310px !important;
+    margin-left: -310px !important;
+    border-radius: 44px !important;
+  }
+}
+
+/* ==========================================
+   توسيع الحشو الداخلي للبطاقة Hero
+   ========================================== */
+
+.hero-content {
+  padding: 3.5rem 3rem !important;
+  border-radius: 32px !important;
+}
+
+/* الـ Badge — يتباعد عن الحد الأعلى */
+.hero-content .hero-badge {
+  margin-top: 0.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* العنوان — مسافة من الـ Badge */
+.hero-content .hero-title {
+  margin-bottom: 1.8rem !important;
+  line-height: 1.3 !important;
+}
+
+/* الوصف */
+.hero-content .hero-subtitle {
+  margin-bottom: 2.5rem !important;
+}
+
+/* الأزرار — تبعد عن الحد السفلي */
+.hero-content .hero-buttons {
+  margin-bottom: 1rem !important;
+  gap: 1rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+}
+
+/* كل زر يأخذ مساحة */
+.hero-content .hero-buttons .btn-primary,
+.hero-content .hero-buttons .btn-secondary {
+  min-width: 180px !important;
+  padding: 1rem 2rem !important;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 2.5rem 1.5rem !important;
+    border-radius: 24px !important;
+  }
+  
+  .hero-content .hero-badge {
+    margin-bottom: 1.5rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .hero-content .hero-title {
+    margin-bottom: 1.2rem !important;
+  }
+  
+  .hero-content .hero-subtitle {
+    margin-bottom: 1.8rem !important;
+  }
+  
+  .hero-content .hero-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  
+  .hero-content .hero-buttons .btn-primary,
+  .hero-content .hero-buttons .btn-secondary {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================
+   إصلاح عرض الأزرار في Hero
+   ========================================== */
+
+.hero-content .hero-buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 1rem !important;
+  margin-bottom: 1rem !important;
+  width: auto !important;
+}
+
+.hero-content .hero-buttons .btn-primary,
+.hero-content .hero-buttons .btn-secondary {
+  min-width: auto !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: 1rem 2rem !important;
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+}
+
+/* الموبايل — الأزرار تحت بعض */
+@media (max-width: 768px) {
+  .hero-content .hero-buttons {
+    flex-direction: row !important;
+    width: 100% !important;
+  }
+  
+  .hero-content .hero-buttons .btn-primary,
+  .hero-content .hero-buttons .btn-secondary {
+    width: auto !important;
+    flex: 1 1 auto !important;
+    max-width: none !important;
+    padding: 0.9rem 1.2rem !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* ==========================================
+   إصلاح نهائي — Hero
+   ========================================== */
+
+/* حشو داخلي واضح للبطاقة */
+.hero-content {
+  padding: 3rem 2.5rem !important;
+  border-radius: 28px !important;
+  box-sizing: border-box !important;
+  max-width: 560px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* النص — يبعد عن الحدود */
+.hero-content .hero-subtitle {
+  margin-bottom: 2.5rem !important;
+  padding: 0 0.5rem !important;
+  line-height: 1.9 !important;
+}
+
+/* العنوان */
+.hero-content .hero-title {
+  margin-bottom: 1.5rem !important;
+  padding: 0 0.5rem !important;
+}
+
+/* الـ Badge */
+.hero-content .hero-badge {
+  margin-bottom: 1.5rem !important;
+  margin-top: 0.5rem !important;
+}
+
+/* الأزرار — عمودية واحدة فوق الثانية */
+.hero-content .hero-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  gap: 0.8rem !important;
+  width: 100% !important;
+  padding: 0 0.5rem !important;
+  box-sizing: border-box !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.hero-content .hero-buttons .btn-primary,
+.hero-content .hero-buttons .btn-secondary {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 1rem 1.5rem !important;
+  font-size: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 2.5rem 1.5rem !important;
+    border-radius: 24px !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-content .hero-subtitle {
+    margin-bottom: 2rem !important;
+    font-size: 0.95rem !important;
+  }
+  
+  .hero-content .hero-buttons {
+    gap: 0.7rem !important;
+  }
+  
+  .hero-content .hero-buttons .btn-primary,
+  .hero-content .hero-buttons .btn-secondary {
+    padding: 0.9rem 1.2rem !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ==========================================
+   أزرار أقل عرض — Hero
+   ========================================== */
+
+.hero-content .hero-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.8rem !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.hero-content .hero-buttons .btn-primary,
+.hero-content .hero-buttons .btn-secondary {
+  width: 75% !important;
+  max-width: 320px !important;
+  padding: 0.9rem 1.5rem !important;
+  font-size: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  margin: 0 auto !important;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  .hero-content .hero-buttons .btn-primary,
+  .hero-content .hero-buttons .btn-secondary {
+    width: 85% !important;
+    max-width: 280px !important;
+    padding: 0.85rem 1.2rem !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ==========================================
+   زجاج ناعم — الجزء 1: Hero
+   ========================================== */
+
+.hero-content {
+  background: rgba(15, 25, 45, 0.35) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(120, 200, 255, 0.15) !important;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(80, 150, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.hero-content .hero-buttons .btn-primary,
+.hero-content .hero-buttons .btn-secondary {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(120, 200, 255, 0.2) !important;
+  color: #ffffff !important;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.35s ease !important;
+}
+
+.hero-content .hero-buttons .btn-primary:hover,
+.hero-content .hero-buttons .btn-secondary:hover {
+  background: rgba(120, 200, 255, 0.12) !important;
+  border-color: rgba(120, 200, 255, 0.4) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 
+    0 8px 28px rgba(0, 0, 0, 0.35),
+    0 0 40px rgba(80, 150, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+.hero-content .hero-badge {
+  background: rgba(120, 200, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(120, 200, 255, 0.25) !important;
+  color: #a8d8ff !important;
+  box-shadow: 0 4px 16px rgba(80, 150, 255, 0.1) !important;
+}
+
+/* ==========================================
+   زجاج ناعم — الجزء 2: البطاقات
+   ========================================== */
+
+/* Features */
+.feature-card,
+.features .card,
+.feature-item {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(120, 200, 255, 0.12) !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  transition: all 0.35s ease !important;
+}
+
+.feature-card:hover,
+.features .card:hover,
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(120, 200, 255, 0.3) !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(80, 150, 255, 0.15) !important;
+}
+
+/* Stats */
+.stats .stat,
+.stat-card,
+.stat-item {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(120, 200, 255, 0.12) !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Social */
+#social-section .social-card,
+#social-section .card,
+.social-item {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(120, 200, 255, 0.12) !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  transition: all 0.35s ease !important;
+}
+
+#social-section .social-card:hover,
+#social-section .card:hover,
+.social-item:hover {
+  background: rgba(120, 200, 255, 0.1) !important;
+  border-color: rgba(120, 200, 255, 0.3) !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(80, 150, 255, 0.15) !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-content {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+  
+  .hero-content .hero-buttons .btn-primary,
+  .hero-content .hero-buttons .btn-secondary {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+}
+
+/* ==========================================
+   إصلاح Zoom والاهتزاز على الموبايل
+   ========================================== */
+
+/* 1. منع zoom عند الكتابة */
+body.page-auth input,
+body.page-auth textarea,
+body.page-auth select {
+  font-size: 16px !important;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+
+/* 2. منع تكبير/تصغير الشاشة */
+html,
+body {
+  -webkit-text-size-adjust: 100% !important;
+  -ms-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+
+/* 3. استخدام dvh بدل vh للموبايل (دقة أعلى) */
+@media (max-width: 768px) {
+  body.page-auth {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+  }
+  
+  body.page-auth .page-wrap {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    padding: 90px 1rem 1.5rem !important;
+  }
+}
+
+/* 4. منع اهتزاز الصفحة */
+body {
+  overscroll-behavior-y: none !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* 5. تثبيت الأزرار */
+body.page-auth .auth-tabs button {
+  font-size: 16px !important;
+  touch-action: manipulation !important;
+}
+
+body.page-auth button,
+body.page-auth .btn-primary {
+  font-size: 16px !important;
+  touch-action: manipulation !important;
+}
+
+/* 6. منع تكبير عند الضغط مرتين */
+* {
+  touch-action: manipulation !important;
+}
+
+/* 7. عرض ثابت للحقول */
+body.page-auth input {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
