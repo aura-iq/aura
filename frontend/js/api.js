@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = 'https://aura-zeta-ruby.vercel.app/api';
 
 function getToken() {
   return localStorage.getItem('aura_token') || null;
